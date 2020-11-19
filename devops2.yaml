@@ -1,0 +1,22 @@
+---
+- hosts: web,db
+  tasks:
+  - name: Create a directory if it does not exist
+    file:
+      path: /tmp/newdir1
+      state: directory
+      mode: '0755'
+  - name: test command module
+    command: "uname -a "
+    register: devops
+  - debug:
+       msg: "devops.stdout"
+       
+  - shell: echo "{{devops.stdout}}" >>/tmp/somefile
+
+  - name: Specifying a path directly
+    fetch:
+       src: /tmp/somefile
+       dest: /tmp/prefix-{{ inventory_hostname }}
+       flat: yes
+

@@ -1,0 +1,11 @@
+- hosts: all
+  tasks:
+  - name: test
+    ping:
+  - name: execute a command on re,ote machine
+    command: "uname -a"
+  - name: Execute command with piped 
+    shell: "echo 'My name is Devops' >>test"
+  - name: Check that you can connect (GET) to a page and it returns a status 200
+    uri:
+       url: http://www.example.com

@@ -1,0 +1,37 @@
+---
+- hosts: all
+  vars_prompt:
+    - name: username
+      prompt: "What is uasername?"
+      private: no
+    - name: data
+      prompt: "What is the password ?"
+  vars:
+    hello:
+      - World
+      - Asia
+      - South America
+      - North America
+      - Artic
+      - Antartic
+      - Oceania
+      - Europe
+      - Africa
+    python:
+      Designer: 'Guido van Rosum'
+      Developer: 'Python Software Foundation'
+      OS: 'Cross-platform'
+  tasks:
+  - debug:
+      msg: "Hi {{username}} welcome to my class"
+  - name: test on devops machine
+    ping:
+  - name: This command will change the working directory to somedir/ and will only run when somedir/somelog.txt doesn't exist
+    shell: echo "This is Ansible {{data}} Class" >> somelog.txt
+    args:
+      chdir: /tmp
+  - name:  test jinjs templating 
+    template:
+        src: test.j2
+        dest: /tmp/test
+        mode: 0777      

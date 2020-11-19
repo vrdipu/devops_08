@@ -1,0 +1,42 @@
+---
+- hosts: all
+  tasks:
+  - name: test
+    ping:
+  - name: execute a command on re,ote machine
+    command: "uname -a"
+  - name: Execute command with piped 
+    shell: "echo 'My name is Devops' >>test"
+  - name: Add the user 'johnd' with a specific uid and a primary group of 'admin'
+    user:
+      name: "{{item.name}}"
+      uid: "{{item.uid}}"
+    loop:
+      - name: Arun
+        uid: 1060
+      - name: Subash
+        uid: 1062
+      - name: Jeeson
+        uid: 1063
+      - name: Umesh
+        uid: 1064
+    
+  - name: Remove the user 
+    user:
+      name: "{{item.name}}"
+      state: absent
+      remove: yes
+    loop:
+      - name: Arun
+        uid: 1060
+      - name: Subash
+        uid: 1064
+  - name: Example condition
+    shell: "cat /etc/passwd"
+    register: passwd
+  - shell: "mkdir /tmp/test"
+    when: passwd.stdout.find('Jeeson') == True
+
+
+
+

@@ -1,0 +1,28 @@
+- hosts: all
+  vars_prompt:
+    - name: ip
+      prompt: "please provide customer ip?"
+      private: no
+  tasks:
+  - name: test
+    ping:
+  - name: execute a command on re,ote machine
+    command: "uname -a"
+  - name: Execute command with piped 
+    shell: "echo 'My name is Devops' >>test"
+  - name: Add the user 'johnd' with a specific uid and a primary group of 'admin'
+    shell: "{{item}}"
+    with_items:
+      - "uname -a"
+      - "uptime"
+      - "touch /tmp/new"
+      - "ls -lrt /tmp"
+
+  - name: Add ip address 
+    shell: "echo {{item}} >>/tmp/iplist"
+    with_items:
+     - 192.168.{{ip}}.20
+     - 192.168.{{ip}}.21
+     - 192.168.{{ip}}.22
+     - 192.168.{{ip}}.23
+     - 192.168.{{ip}}.24
