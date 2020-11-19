@@ -1,0 +1,17 @@
+Hi This is for devops {{hello}}
+diffrent contries are 
+{% for contries  in hello  %}
+  <li>{{ contries|e }}</li>
+{% endfor %}
+
+Hi This is Host Name {{inventory_hostname}}
+
+
+
+
+
+<dl>
+{% for key, value in python.items() %}
+MY key is     {{ key|e }} My value is     {{ value|e }}
+{% endfor %}
+</dl>
